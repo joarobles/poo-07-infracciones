@@ -67,6 +67,14 @@ public class Licencia {
         this.actas.add(acta);
     }
     
+    /**
+     * Devuelve la cantidad de infracciones cometidas en un periodo de tiempo
+     * determinado
+     * 
+     * @param fechaDesde fecha de inicio de la consulta
+     * @param fechaHasta fecha de fin de la consulta
+     * @return Cantidad de infracciones cometidas
+     */
     public int cuantasInfraccionesEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
         int infracciones = 0;
         
