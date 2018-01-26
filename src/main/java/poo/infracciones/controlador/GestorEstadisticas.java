@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import poo.infracciones.ActaConstatacion;
-import poo.infracciones.Conductor;
-import poo.infracciones.Infraccion;
-import poo.infracciones.Licencia;
-import poo.infracciones.TipoDeInfraccion;
+import poo.infracciones.modelos.ActaConstatacion;
+import poo.infracciones.modelos.Conductor;
+import poo.infracciones.modelos.Infraccion;
+import poo.infracciones.modelos.Licencia;
+import poo.infracciones.modelos.TipoDeInfraccion;
 
 /**
  *

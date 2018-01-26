@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.infracciones;
+package poo.infracciones.modelos;
 
 import java.util.Iterator;
 import java.util.List;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.infracciones;
+package poo.infracciones.modelos;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -139,6 +139,11 @@ public class ActaConstatacion {
 
     public void agregarInfraccion(Infraccion infraccion) {
         this.infracciones.add(infraccion);
+    }
+
+    public boolean fueLabradaEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return fechaHoraGeneracion.isAfter(fechaDesde.atStartOfDay()) && 
+               fechaHoraGeneracion.isBefore(fechaHasta.atStartOfDay());
     }
 
     @Override

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.infracciones;
+package poo.infracciones.modelos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,8 +85,7 @@ public class Licencia {
             ActaConstatacion acta = iter.next();
             
             // comprobamos que la fecha sea entre las buscadas
-            if (acta.getFechaHoraGeneracion().isAfter(fechaDesde.atStartOfDay()) && 
-                    acta.getFechaHoraGeneracion().isBefore(fechaHasta.atStartOfDay())) {
+            if (acta.fueLabradaEnPeriodo(fechaDesde, fechaHasta)) {
                 
                 // acumulamos la cantidad de infracciones
                 infracciones += acta.cuantasInfraccionesContiene();
