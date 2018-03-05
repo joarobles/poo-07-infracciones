@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -122,7 +123,15 @@ public class ActaConstatacion {
     }
     
     public BigDecimal calcularMontoTotalInfracciones() {
-        return null;
+        BigDecimal total = BigDecimal.ZERO;
+        
+        // iteramos sobre las infracciones del acta
+        Iterator<Infraccion> iter = infracciones.iterator();
+        while (iter.hasNext()) {
+            total = total.add(iter.next().getMonto());
+        }
+        
+        return total;
     }
     
     public int cuantasInfraccionesContiene() {
@@ -141,9 +150,13 @@ public class ActaConstatacion {
         this.infracciones.add(infraccion);
     }
 
-    public boolean fueLabradaEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
+    public boolean estasEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
         return fechaHoraGeneracion.isAfter(fechaDesde.atStartOfDay()) && 
                fechaHoraGeneracion.isBefore(fechaHasta.atStartOfDay());
+    }
+
+    public boolean estaPagada() {
+        return estado.esPagada();
     }
 
     @Override

@@ -105,8 +105,17 @@ public class Conductor {
         return infracciones;
     }
     
-    public BigDecimal cuantoDebePorInfraccionesNoPagadas() {
-        return null;
+    public BigDecimal cuantoDebePorInfraccionesNoPagadas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        BigDecimal total = BigDecimal.ZERO;
+        
+        // iteramos sobre las licencias del conductor
+        Iterator<Licencia> iter = licencias.iterator();
+        while (iter.hasNext()) {
+            // acumulamos los montos de actas no pagadas
+            total = total.add(iter.next().cuantoDebePorInfraccionesNoPagadas(fechaDesde, fechaHasta));
+        }
+        
+        return total;
     }
     
     public List<Infraccion> obtenerInfraccionesEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {

@@ -5,6 +5,7 @@
  */
 package poo.infracciones.modelos;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -85,7 +86,7 @@ public class Licencia {
             ActaConstatacion acta = iter.next();
             
             // comprobamos que la fecha sea entre las buscadas
-            if (acta.fueLabradaEnPeriodo(fechaDesde, fechaHasta)) {
+            if (acta.estasEnPeriodo(fechaDesde, fechaHasta)) {
                 
                 // acumulamos la cantidad de infracciones
                 infracciones += acta.cuantasInfraccionesContiene();
@@ -93,5 +94,25 @@ public class Licencia {
         }
         
         return infracciones;
+    }
+
+    public BigDecimal cuantoDebePorInfraccionesNoPagadas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        BigDecimal total = BigDecimal.ZERO;
+        
+        // iteramos sobre las licencias del conductor
+        Iterator<ActaConstatacion> iter = actas.iterator();
+        while (iter.hasNext()) {
+            // obtenemos el acta actual
+            ActaConstatacion acta = iter.next();
+            
+            // comprobamos que la fecha sea entre las buscadas
+            if (acta.estasEnPeriodo(fechaDesde, fechaHasta) && !acta.estaPagada()) {
+                
+                // acumulamos la cantidad de infracciones
+                total = total.add(acta.calcularMontoTotalInfracciones());
+            }
+        }
+        
+        return total;
     }
 }

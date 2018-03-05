@@ -17,6 +17,10 @@ public class EstadoActa {
     public EstadoActa() {
     }
 
+    public EstadoActa(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -31,6 +35,10 @@ public class EstadoActa {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean esPagada() {
+        return nombre.equalsIgnoreCase("Pagada");
     }
 
     @Override
