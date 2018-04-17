@@ -63,7 +63,7 @@ public class GestorEstadisticas {
         acta1.agregarInfraccion(pasaEnDobleLineaRutaE53);
         acta2.agregarInfraccion(lucesBajasApagadasRutaE53);
         
-        Licencia vigente = new Licencia();
+        Licencia vigente = new Licencia(LocalDate.of(2017, Month.DECEMBER, 1));
         
         // relación de asociación en ambas direcciones
         vigente.agregarActaConstatacion(acta1);
@@ -72,7 +72,7 @@ public class GestorEstadisticas {
         vigente.agregarActaConstatacion(acta2);
         acta2.setLicencia(vigente);
         
-        Licencia licenciaMoto = new Licencia();
+        Licencia licenciaMoto = new Licencia(LocalDate.of(2017, Month.JULY, 1));
         
         Conductor federico = new Conductor("Federico", "Romano", "34070692", LocalDate.of(1989, Month.DECEMBER, 27), "Masculino");
         federico.agregarLicencia(vigente);

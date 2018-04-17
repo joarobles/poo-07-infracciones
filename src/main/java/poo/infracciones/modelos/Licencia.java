@@ -18,6 +18,7 @@ import java.util.List;
 public class Licencia {
     
     private int numero;
+    private LocalDate fechaOtorgamiento;
     private LocalDate fechaVencimiento;
     private OrganismoEmisor organismoEmisor;
     private List<ActaConstatacion> actas;
@@ -32,12 +33,25 @@ public class Licencia {
         this.actas = new ArrayList<>();
     }
 
+    public Licencia(LocalDate fechaOtorgamiento) {
+        this.fechaOtorgamiento = fechaOtorgamiento;
+        this.actas = new ArrayList<>();
+    }
+
     public int getNumero() {
         return numero;
     }
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public LocalDate getFechaOtorgamiento() {
+        return fechaOtorgamiento;
+    }
+
+    public void setFechaOtorgamiento(LocalDate fechaOtorgamiento) {
+        this.fechaOtorgamiento = fechaOtorgamiento;
     }
 
     public LocalDate getFechaVencimiento() {
@@ -109,10 +123,15 @@ public class Licencia {
             if (acta.estasEnPeriodo(fechaDesde, fechaHasta) && !acta.estaPagada()) {
                 
                 // acumulamos la cantidad de infracciones
-                total = total.add(acta.calcularMontoTotalInfracciones());
+                total = total.add(acta.calcularTotalInfracciones());
             }
         }
         
         return total;
+    }
+
+    public boolean estasEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return fechaOtorgamiento.isAfter(fechaDesde) && 
+               fechaOtorgamiento.isBefore(fechaHasta);
     }
 }

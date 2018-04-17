@@ -98,8 +98,14 @@ public class Conductor {
         // iteramos sobre las licencias del conductor
         Iterator<Licencia> iter = licencias.iterator();
         while (iter.hasNext()) {
-            // acumulamos las infracciones de esta licencia
-            infracciones += iter.next().cuantasInfraccionesEnPeriodo(fechaDesde, fechaHasta);
+            // obtenemos la licencia actual
+            Licencia licencia = iter.next();
+            
+            // si fue emitida en el periodo
+            if (licencia.estasEnPeriodo(fechaDesde, fechaHasta)) {
+                // acumulamos las infracciones de esta licencia
+                infracciones += licencia.cuantasInfraccionesEnPeriodo(fechaDesde, fechaHasta);
+            }
         }
         
         return infracciones;
@@ -111,8 +117,14 @@ public class Conductor {
         // iteramos sobre las licencias del conductor
         Iterator<Licencia> iter = licencias.iterator();
         while (iter.hasNext()) {
-            // acumulamos los montos de actas no pagadas
-            total = total.add(iter.next().cuantoDebePorInfraccionesNoPagadas(fechaDesde, fechaHasta));
+            // obtenemos la licencia actual
+            Licencia licencia = iter.next();
+            
+            // si fue emitida en el periodo
+            if (licencia.estasEnPeriodo(fechaDesde, fechaHasta)) {
+                // acumulamos los montos de actas no pagadas
+                total = total.add(licencia.cuantoDebePorInfraccionesNoPagadas(fechaDesde, fechaHasta));
+            }
         }
         
         return total;

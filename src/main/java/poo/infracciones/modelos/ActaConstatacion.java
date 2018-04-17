@@ -122,7 +122,7 @@ public class ActaConstatacion {
         this.infracciones = infracciones;
     }
     
-    public BigDecimal calcularMontoTotalInfracciones() {
+    public BigDecimal calcularTotalInfracciones() {
         BigDecimal total = BigDecimal.ZERO;
         
         // iteramos sobre las infracciones del acta
