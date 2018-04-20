@@ -27,14 +27,10 @@ public class Licencia {
         this.actas = new ArrayList<>();
     }
 
-    public Licencia(int numero, LocalDate fechaVencimiento) {
+    public Licencia(int numero, LocalDate fechaOtorgamiento, LocalDate fechaVencimiento) {
         this.numero = numero;
-        this.fechaVencimiento = fechaVencimiento;
-        this.actas = new ArrayList<>();
-    }
-
-    public Licencia(LocalDate fechaOtorgamiento) {
         this.fechaOtorgamiento = fechaOtorgamiento;
+        this.fechaVencimiento = fechaVencimiento;
         this.actas = new ArrayList<>();
     }
 
@@ -131,7 +127,15 @@ public class Licencia {
     }
 
     public boolean estasEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
-        return fechaOtorgamiento.isAfter(fechaDesde) && 
-               fechaOtorgamiento.isBefore(fechaHasta);
+        boolean otorgadaEntre = fechaOtorgamiento.isAfter(fechaDesde) && 
+                                fechaOtorgamiento.isBefore(fechaHasta);
+        
+        boolean vencidaEntre  = fechaVencimiento.isAfter(fechaDesde) && 
+                                fechaVencimiento.isBefore(fechaHasta);
+        
+        boolean periodoEntre  = fechaOtorgamiento.isBefore(fechaDesde) &&
+                                fechaVencimiento.isAfter(fechaHasta);
+        
+        return otorgadaEntre || vencidaEntre || periodoEntre;
     }
 }
