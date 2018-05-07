@@ -87,55 +87,14 @@ public class Licencia {
      * @return Cantidad de infracciones cometidas
      */
     public int cuantasInfraccionesEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
-        int infracciones = 0;
-        
-        // iteramos sobre las licencias del conductor
-        Iterator<ActaConstatacion> iter = actas.iterator();
-        while (iter.hasNext()) {
-            // obtenemos el acta actual
-            ActaConstatacion acta = iter.next();
-            
-            // comprobamos que la fecha sea entre las buscadas
-            if (acta.estasEnPeriodo(fechaDesde, fechaHasta)) {
-                
-                // acumulamos la cantidad de infracciones
-                infracciones += acta.cuantasInfraccionesContiene();
-            }
-        }
-        
-        return infracciones;
+        return -1;
     }
 
     public BigDecimal cuantoDebePorInfraccionesNoPagadas(LocalDate fechaDesde, LocalDate fechaHasta) {
-        BigDecimal total = BigDecimal.ZERO;
-        
-        // iteramos sobre las licencias del conductor
-        Iterator<ActaConstatacion> iter = actas.iterator();
-        while (iter.hasNext()) {
-            // obtenemos el acta actual
-            ActaConstatacion acta = iter.next();
-            
-            // comprobamos que la fecha sea entre las buscadas
-            if (acta.estasEnPeriodo(fechaDesde, fechaHasta) && !acta.estaPagada()) {
-                
-                // acumulamos la cantidad de infracciones
-                total = total.add(acta.calcularTotalInfracciones());
-            }
-        }
-        
-        return total;
+        return null;
     }
 
     public boolean estasEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
-        boolean otorgadaEntre = fechaOtorgamiento.isAfter(fechaDesde) && 
-                                fechaOtorgamiento.isBefore(fechaHasta);
-        
-        boolean vencidaEntre  = fechaVencimiento.isAfter(fechaDesde) && 
-                                fechaVencimiento.isBefore(fechaHasta);
-        
-        boolean periodoEntre  = fechaOtorgamiento.isBefore(fechaDesde) &&
-                                fechaVencimiento.isAfter(fechaHasta);
-        
-        return otorgadaEntre || vencidaEntre || periodoEntre;
+        return false;
     }
 }

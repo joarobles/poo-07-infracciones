@@ -28,19 +28,7 @@ public class Modelo {
     }
     
     public Marca queMarca(List<Marca> marca) {
-        Marca retorno = null;
-        
-        Iterator<Marca> iter = marca.iterator();
-        while (iter.hasNext()) {
-            Marca actual = iter.next();
-            
-            if (actual.soyTuMarca(this)) {
-                retorno = actual;
-                break;
-            }
-        }
-        
-        return retorno;
+        return null;
     }
 
     @Override

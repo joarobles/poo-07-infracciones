@@ -29,17 +29,7 @@ public class GestorEstadisticas {
         // obtenemos el conductor solicitado
         Conductor conductor = obtenerConductor();
         
-        LocalDate fechaDesde = obtenerFechaDesde();
-        LocalDate fechaHasta = obtenerFechaHasta();
-        
-        // TODO validar las fechas ingresadas
-        
-        // le preguntamos al conductor las estadísticas
-        int cuantasInfraccionesEnPeriodo = conductor.cuantasInfraccionesEnPeriodo(fechaDesde, fechaHasta);
-        BigDecimal totalImpagas = conductor.cuantoDebePorInfraccionesNoPagadas(fechaDesde, fechaHasta);
-        
-        // las mostramos en pantalla..
-        mostrarResultados(cuantasInfraccionesEnPeriodo, totalImpagas);
+        System.out.println("Conductor: " + conductor);
     }
     
     public Conductor obtenerConductor() {
@@ -79,18 +69,5 @@ public class GestorEstadisticas {
         federico.agregarLicencia(licenciaMoto);
         
         return federico;
-    }
-    
-    public LocalDate obtenerFechaDesde() {
-        return LocalDate.of(2016, Month.JANUARY, 1);
-    }
-    
-    public LocalDate obtenerFechaHasta() {
-        return LocalDate.now();
-    }
-
-    public void mostrarResultados(int cuantasInfraccionesEnPeriodo, BigDecimal totalImpagas) {
-        System.out.println("Cantidad de infracciones: " + cuantasInfraccionesEnPeriodo);
-        System.out.println("TOTAL de infracciones impagas: $" + totalImpagas);
     }
 }

@@ -93,41 +93,11 @@ public class Conductor {
     }
     
     public int cuantasInfraccionesEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
-        int infracciones = 0;
-        
-        // iteramos sobre las licencias del conductor
-        Iterator<Licencia> iter = licencias.iterator();
-        while (iter.hasNext()) {
-            // obtenemos la licencia actual
-            Licencia licencia = iter.next();
-            
-            // si fue emitida en el periodo
-            if (licencia.estasEnPeriodo(fechaDesde, fechaHasta)) {
-                // acumulamos las infracciones de esta licencia
-                infracciones += licencia.cuantasInfraccionesEnPeriodo(fechaDesde, fechaHasta);
-            }
-        }
-        
-        return infracciones;
+        return -1;
     }
     
     public BigDecimal cuantoDebePorInfraccionesNoPagadas(LocalDate fechaDesde, LocalDate fechaHasta) {
-        BigDecimal total = BigDecimal.ZERO;
-        
-        // iteramos sobre las licencias del conductor
-        Iterator<Licencia> iter = licencias.iterator();
-        while (iter.hasNext()) {
-            // obtenemos la licencia actual
-            Licencia licencia = iter.next();
-            
-            // si fue emitida en el periodo
-            if (licencia.estasEnPeriodo(fechaDesde, fechaHasta)) {
-                // acumulamos los montos de actas no pagadas
-                total = total.add(licencia.cuantoDebePorInfraccionesNoPagadas(fechaDesde, fechaHasta));
-            }
-        }
-        
-        return total;
+        return null;
     }
     
     public List<Infraccion> obtenerInfraccionesEnPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {

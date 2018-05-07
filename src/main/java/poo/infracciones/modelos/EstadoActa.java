@@ -38,7 +38,7 @@ public class EstadoActa {
     }
 
     public boolean esPagada() {
-        return nombre.equalsIgnoreCase("Pagada");
+        return false;
     }
 
     @Override
