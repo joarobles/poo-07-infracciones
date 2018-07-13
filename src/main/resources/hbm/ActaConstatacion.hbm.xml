@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping>
+  <class name="poo.infracciones.modelos.ActaConstatacion" table="ActaConstatacion">
+      <id name="numero" column="numero">
+          <generator class="identity" />
+      </id>
+      
+      <property name="fechaHoraGeneracion" type="java.time.LocalDateTime" />
+      <property name="observaciones" />
+      
+      <many-to-one name="estado" class="poo.infracciones.modelos.EstadoActa" column="idEstado" not-null="true" lazy="false" />
+      <many-to-one name="vehiculo" class="poo.infracciones.modelos.Vehiculo" column="dominioVehiculo" not-null="true" lazy="false" />
+      <many-to-one name="autoridadConstatacion" class="poo.infracciones.modelos.AutoridadConstatacion" column="legajoAutoridadConstatacion" not-null="true" lazy="false" />
+      <many-to-one name="ruta" class="poo.infracciones.modelos.Ruta" column="numeroRuta" not-null="true" lazy="false" />
+      
+      <bag name="infracciones" cascade="all,delete-orphan" lazy="false">
+          <key column="numeroActaConstatacion" not-null="true" />
+          <one-to-many class="poo.infracciones.modelos.Infraccion" />
+      </bag>
+          
+  </class>
+</hibernate-mapping>

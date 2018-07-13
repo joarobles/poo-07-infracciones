@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping>
+    <class name="poo.infracciones.modelos.Licencia" table="Licencia">
+        <id name="numero" column="numero">
+            <generator class="assigned" />
+        </id>
+      
+        <property name="fechaOtorgamiento" type="java.time.LocalDate" />
+        <property name="fechaVencimiento" type="java.time.LocalDate" />
+      
+        <bag name="actas" lazy="false" cascade="all,delete-orphan">
+            <key column="numeroLicencia" not-null="true" />
+            <one-to-many class="poo.infracciones.modelos.ActaConstatacion" />
+        </bag>
+      
+        <many-to-one name="organismoEmisor" class="poo.infracciones.modelos.OrganismoEmisor" not-null="true" column="idOrganismoEmisor" />
+    </class>
+</hibernate-mapping>

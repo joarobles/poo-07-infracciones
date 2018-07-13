@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping>
+  <class name="poo.infracciones.modelos.Vehiculo" table="Vehiculo">
+      <id name="dominio" column="dominio">
+          <generator class="assigned" />
+      </id>
+      <property name="anioPatentamiento" />
+      <property name="color" />
+      
+      <!-- TODO mapear la relación con el Modelo -->
+  </class>
+</hibernate-mapping>

@@ -13,9 +13,9 @@ import java.math.BigDecimal;
  */
 public class TipoDeInfraccion {
     
-    private int codigo;
+    private Integer codigo;
     private String descripcion;
-    private String observacion;
+    private String observaciones;
     private BigDecimal importe;
     private int cantidadPuntosDescuento;
     private float porcentajeDescuento;
@@ -28,11 +28,11 @@ public class TipoDeInfraccion {
         this.descripcion = descripcion;
     }
 
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -44,12 +44,12 @@ public class TipoDeInfraccion {
         this.descripcion = descripcion;
     }
 
-    public String getObservacion() {
-        return observacion;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     public BigDecimal getImporte() {
@@ -86,7 +86,7 @@ public class TipoDeInfraccion {
 
     @Override
     public String toString() {
-        return "TipoDeInfraccion{" + "codigo=" + codigo + ", descripcion=" + descripcion + ", observacion=" + observacion + ", importe=" + importe + ", cantidadPuntosDescuento=" + cantidadPuntosDescuento + ", porcentajeDescuento=" + porcentajeDescuento + '}';
+        return descripcion;
     }
     
 }

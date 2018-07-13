@@ -12,7 +12,7 @@ package poo.infracciones.modelos;
 public class Ruta {
     
     private String nombre;
-    private int numero;
+    private Integer numero;
     private TipoDeRuta tipoRuta;
 
     public Ruta() {
@@ -26,11 +26,11 @@ public class Ruta {
         this.nombre = nombre;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping>
+  <class name="poo.infracciones.modelos.Infraccion" table="Infraccion">
+      <id name="id" column="id">
+          <generator class="identity" />
+      </id>
+      
+      <property name="monto" type="java.math.BigDecimal" />
+      
+      <many-to-one name="tipo" class="poo.infracciones.modelos.TipoDeInfraccion" column="codigoTipoInfraccion" not-null="true" />
+  </class>
+</hibernate-mapping>

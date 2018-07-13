@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Licencia {
     
-    private int numero;
+    private Integer numero;
     private LocalDate fechaOtorgamiento;
     private LocalDate fechaVencimiento;
     private OrganismoEmisor organismoEmisor;
@@ -34,11 +34,11 @@ public class Licencia {
         this.actas = new ArrayList<>();
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
