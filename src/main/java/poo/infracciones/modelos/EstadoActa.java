@@ -11,10 +11,19 @@ package poo.infracciones.modelos;
  */
 public class EstadoActa {
  
+    private Integer id;
     private String nombre;
     private String descripcion;
 
     public EstadoActa() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public EstadoActa(String nombre) {

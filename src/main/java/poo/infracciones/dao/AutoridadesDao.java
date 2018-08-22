@@ -5,18 +5,16 @@
  */
 package poo.infracciones.dao;
 
-import poo.infracciones.modelos.Conductor;
+import poo.infracciones.modelos.AutoridadConstatacion;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public interface ConductoresDao {
+public interface AutoridadesDao {
     
-    Conductor obtener(int id);
+    AutoridadConstatacion obtener(int legajo);
     
-    void guardar(Conductor conductor);
-
-    public Conductor buscarPorDni(String dni);
+    void guardar(AutoridadConstatacion autoridad);
     
 }

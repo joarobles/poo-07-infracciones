@@ -5,18 +5,16 @@
  */
 package poo.infracciones.dao;
 
-import poo.infracciones.modelos.Conductor;
+import poo.infracciones.modelos.Ruta;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public interface ConductoresDao {
+public interface RutasDao {
     
-    Conductor obtener(int id);
+    Ruta obtener(int numero);
     
-    void guardar(Conductor conductor);
-
-    public Conductor buscarPorDni(String dni);
+    void guardar(Ruta ruta);
     
 }

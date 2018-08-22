@@ -5,9 +5,11 @@
  */
 package poo.infracciones.dao;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import poo.infracciones.modelos.Conductor;
 
 /**
@@ -16,37 +18,48 @@ import poo.infracciones.modelos.Conductor;
  */
 public class ConductoresDaoImpl implements ConductoresDao {
     
-    private final List<Conductor> conductores;
+    private final SessionFactory sessionFactory;
 
-    public ConductoresDaoImpl() {
-        this.conductores = new ArrayList<>();
+    public ConductoresDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public Conductor obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Conductor conductor;
+    
+        try (Session session = sessionFactory.openSession()) {
+             conductor = session.get(Conductor.class, id);
+        }
+        
+        return conductor;
     }
 
     @Override
     public void guardar(Conductor conductor) {
-        conductores.add(conductor);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(conductor);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public Conductor buscarPorDni(String dni) {
-        Conductor retorno = null;
+        Conductor conductor;
         
-        Iterator<Conductor> iter = conductores.iterator();
-        while (iter.hasNext()) {
-            Conductor c = iter.next();
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Conductor> query = builder.createQuery(Conductor.class);
             
-            if (c.getDni().equals(dni)) {
-                retorno = c;
-                break;
-            }
+            Root<Conductor> root = query.from(Conductor.class);
+            query.select(root);
+            query.where(builder.equal(root.get("dni"), dni));
+            
+            conductor = session.createQuery(query).uniqueResult();
         }
         
-        return retorno;
+        return conductor;
     }
     
 }

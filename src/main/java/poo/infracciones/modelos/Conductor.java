@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class Conductor {
     
+    private Integer id;
     private String nombre;
     private String apellido;
     private String dni;
@@ -34,6 +35,14 @@ public class Conductor {
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
         this.licencias = new ArrayList<>();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

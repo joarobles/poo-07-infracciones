@@ -5,18 +5,14 @@
  */
 package poo.infracciones.dao;
 
-import poo.infracciones.modelos.Conductor;
+import poo.infracciones.modelos.EstadoActa;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public interface ConductoresDao {
+public interface EstadosActasDao {
     
-    Conductor obtener(int id);
-    
-    void guardar(Conductor conductor);
-
-    public Conductor buscarPorDni(String dni);
+    EstadoActa buscarPorNombre(String nombre);
     
 }

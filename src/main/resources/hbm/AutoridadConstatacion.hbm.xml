@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping>
+  <class name="poo.infracciones.modelos.AutoridadConstatacion" table="AutoridadConstatacion">
+      <id name="legajo" column="legajo">
+          <generator class="assigned" />
+      </id>
+      
+      <property name="nombre" />
+      <property name="apellido" />
+      <property name="dni" />
+      <property name="fechaNacimiento" type="java.time.LocalDate" />
+      <property name="sexo" />
+          
+  </class>
+</hibernate-mapping>

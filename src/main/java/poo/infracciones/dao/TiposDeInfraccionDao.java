@@ -5,18 +5,16 @@
  */
 package poo.infracciones.dao;
 
-import poo.infracciones.modelos.Conductor;
+import poo.infracciones.modelos.TipoDeInfraccion;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public interface ConductoresDao {
+public interface TiposDeInfraccionDao {
     
-    Conductor obtener(int id);
+    TipoDeInfraccion obtener(int id);
     
-    void guardar(Conductor conductor);
-
-    public Conductor buscarPorDni(String dni);
+    void guardar(TipoDeInfraccion tipo);
     
 }

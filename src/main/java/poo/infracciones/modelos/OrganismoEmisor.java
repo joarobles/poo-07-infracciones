@@ -11,10 +11,19 @@ package poo.infracciones.modelos;
  */
 public class OrganismoEmisor {
     
+    private Integer id;
     private String nombre;
     private Localidad localidad;
 
     public OrganismoEmisor() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

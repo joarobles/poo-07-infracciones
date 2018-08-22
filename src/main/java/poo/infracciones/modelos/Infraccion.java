@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  */
 public class Infraccion {
     
+    private Integer id;
     private TipoDeInfraccion tipo;
     private BigDecimal monto;
     private String observacion;
@@ -24,6 +25,14 @@ public class Infraccion {
         this.tipo = tipo;
         this.monto = monto;
         this.observacion = observacion;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public TipoDeInfraccion getTipo() {
