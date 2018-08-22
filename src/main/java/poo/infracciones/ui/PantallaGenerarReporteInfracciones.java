@@ -175,6 +175,11 @@ public class PantallaGenerarReporteInfracciones extends javax.swing.JFrame {
         );
 
         btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
@@ -231,6 +236,18 @@ public class PantallaGenerarReporteInfracciones extends javax.swing.JFrame {
         // indicamos al gestor las fechas seleccionadas
         gestor.tomarFechasPeriodo(fechaDesde, fechaHasta);
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // obtenemos las fechas ingresadas
+        LocalDate fechaDesde = LocalDate.parse(txtFechaDesde.getText(), formatter);
+        LocalDate fechaHasta = LocalDate.parse(txtFechaHasta.getText(), formatter);
+        
+        // validamos las fechas del periodo
+        validarFechasPeriodo(fechaDesde, fechaHasta);
+        
+        // indicamos al gestor las fechas seleccionadas
+        gestor.imprimirReporte(fechaDesde, fechaHasta);
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarConductor;

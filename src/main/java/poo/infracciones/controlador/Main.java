@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import poo.infracciones.dao.ConductoresDao;
-import poo.infracciones.dao.ConductoresDaoImpl;
 
 /**
  *
@@ -25,9 +23,8 @@ public class Main {
 			.build();
         
         SessionFactory sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-	ConductoresDao dao = new ConductoresDaoImpl(sessionFactory);
             
-        new GestorEstadisticas(dao).run();
+        new GestorEstadisticas(sessionFactory).run();
         
     }
 }
