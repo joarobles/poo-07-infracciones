@@ -257,7 +257,9 @@ public class PantallaGenerarReporteInfracciones extends javax.swing.JFrame {
     }
 
     private void validarFechasPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) {
-        // TODO validar fecha desde menor o igual a fecha hasta
+        if (!fechaHasta.isAfter(fechaDesde)) {
+            // mostrar mensaje de error
+        }
     }
 
     public void mostrarCantidadInfracciones(int cuantasInfraccionesEnPeriodo) {
