@@ -3,14 +3,24 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infracciones-cometidas-monto-adeudado" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bf08c54-65a4-4801-91d7-e55636fabd98">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="poo-infracciones"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="255"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="737"/>
 	<parameter name="ID_CONDUCTOR" class="java.lang.Integer"/>
 	<parameter name="FECHA_DESDE" class="java.util.Date"/>
 	<parameter name="FECHA_HASTA" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[select acta.fechaHoraGeneracion, acta.dominioVehiculo, est.nombre as "estado", tipo.descripcion as "tipo", inf.cantidadPuntosDescontados, inf.monto from Infraccion inf 
+		<![CDATA[select 
+	acta.fechaHoraGeneracion, 
+	acta.dominioVehiculo, 
+	est.nombre as "estado", 
+	tipo.descripcion as "tipo", 
+	inf.cantidadPuntosDescontados, 
+	inf.monto,
+	IF(est.nombre = "Pagada", 0, inf.monto) as "adeudado"
+from Infraccion inf 
 join ActaConstatacion acta on inf.numeroActaConstatacion = acta.numero
 join TipoInfraccion tipo on inf.codigoTipoInfraccion = tipo.codigo
-join Estado est on acta.idEstado = est.id and est.nombre <> "Pagada"
+join Estado est on acta.idEstado = est.id
 join Licencia lic on acta.numeroLicencia = lic.numero
 join Conductor c on lic.idConductor = c.id
 where c.id = $P{ID_CONDUCTOR} and
@@ -23,8 +33,9 @@ acta.fechaHoraGeneracion < date_format(date_add($P{FECHA_HASTA}, interval 1 day)
 	<field name="tipo" class="java.lang.String"/>
 	<field name="cantidadPuntosDescontados" class="java.lang.Integer"/>
 	<field name="monto" class="java.math.BigDecimal"/>
-	<variable name="MONTO_TOTAL" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	<field name="adeudado" class="java.math.BigDecimal"/>
+	<variable name="MONTO_TOTAL_ADEUDADO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{adeudado}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<background>
@@ -34,7 +45,7 @@ acta.fechaHoraGeneracion < date_format(date_add($P{FECHA_HASTA}, interval 1 day)
 		<band height="20" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="1e811a6e-b933-41b1-a102-9b6c1d9f9dc8">
+				<reportElement x="0" y="0" width="80" height="20" uuid="1e811a6e-b933-41b1-a102-9b6c1d9f9dc8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -43,68 +54,81 @@ acta.fechaHoraGeneracion < date_format(date_add($P{FECHA_HASTA}, interval 1 day)
 				<text><![CDATA[Fecha/hora]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="111" y="0" width="69" height="20" uuid="310427e3-ef44-4df2-9be6-d5bc0eb98bfb"/>
+				<reportElement x="80" y="0" width="69" height="20" uuid="310427e3-ef44-4df2-9be6-d5bc0eb98bfb"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dominio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="0" width="80" height="20" uuid="f9e1d3a5-2f6e-466c-b29a-da84f6ecd352"/>
+				<reportElement x="149" y="0" width="80" height="20" uuid="f9e1d3a5-2f6e-466c-b29a-da84f6ecd352"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="0" width="100" height="20" uuid="0a03f503-7eec-479c-af23-927968ae220b"/>
+				<reportElement x="229" y="0" width="100" height="20" uuid="0a03f503-7eec-479c-af23-927968ae220b"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="430" y="0" width="50" height="20" uuid="74901716-f2ac-411e-be78-f26161fc5385"/>
+				<reportElement x="399" y="0" width="40" height="20" uuid="74901716-f2ac-411e-be78-f26161fc5385"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Puntos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="0" width="70" height="20" uuid="f073d5b0-9071-46b0-90ae-db4f167acf40"/>
+				<reportElement x="439" y="0" width="50" height="20" uuid="f073d5b0-9071-46b0-90ae-db4f167acf40"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Monto]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="490" y="0" width="60" height="20" uuid="bc93e06f-7c4c-41f0-9618-99836b4727f2"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adeudado]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField>
-				<reportElement x="0" y="0" width="111" height="20" uuid="55babf7a-5356-4a28-b287-3689b255567a"/>
+				<reportElement x="0" y="0" width="80" height="20" uuid="55babf7a-5356-4a28-b287-3689b255567a"/>
 				<textFieldExpression><![CDATA[$F{fechaHoraGeneracion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="70" height="20" uuid="cb2cdf22-67c4-4627-86c9-dc9501607b91"/>
+				<reportElement x="80" y="0" width="70" height="20" uuid="cb2cdf22-67c4-4627-86c9-dc9501607b91"/>
 				<textFieldExpression><![CDATA[$F{dominioVehiculo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="180" y="0" width="80" height="20" uuid="2890a080-9d5d-4260-b859-9f2871238ccf"/>
+				<reportElement x="150" y="0" width="80" height="20" uuid="2890a080-9d5d-4260-b859-9f2871238ccf"/>
 				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="0" width="170" height="20" uuid="7f654a2c-8216-4419-9697-1602c3641276"/>
+				<reportElement x="229" y="0" width="170" height="20" uuid="7f654a2c-8216-4419-9697-1602c3641276"/>
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="430" y="0" width="50" height="20" uuid="f149fb23-d6c9-4eae-ab27-65c32d4451ec"/>
+				<reportElement x="399" y="0" width="40" height="20" uuid="f149fb23-d6c9-4eae-ab27-65c32d4451ec"/>
 				<textFieldExpression><![CDATA[$F{cantidadPuntosDescontados}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="0" width="70" height="20" uuid="d072963d-abb2-4d97-9a98-496f17f1ff1a"/>
+				<reportElement x="439" y="0" width="50" height="20" uuid="d072963d-abb2-4d97-9a98-496f17f1ff1a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="60" height="20" uuid="d1fbccd1-20a7-4f7a-bb3c-3de624e597bd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{adeudado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -116,7 +140,7 @@ acta.fechaHoraGeneracion < date_format(date_add($P{FECHA_HASTA}, interval 1 day)
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{MONTO_TOTAL}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{MONTO_TOTAL_ADEUDADO}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="300" y="0" width="180" height="20" uuid="f4364915-2058-4775-b504-067c2d08efbf"/>
