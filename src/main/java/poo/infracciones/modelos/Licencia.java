@@ -106,6 +106,14 @@ public class Licencia {
         return infracciones;
     }
 
+    /**
+     * Sumamos los montos de aquellas Actas labradas en el periodo especificado
+     * que no se encuentran "Pagadas" y devolvemos el total.
+     * 
+     * @param fechaDesde fecha de inicio de la consulta
+     * @param fechaHasta fecha de fin de la consulta
+     * @return monto total de aquellas Actas impagas
+     */
     public BigDecimal cuantoDebePorInfraccionesNoPagadas(LocalDate fechaDesde, LocalDate fechaHasta) {
         BigDecimal total = BigDecimal.ZERO;
         
